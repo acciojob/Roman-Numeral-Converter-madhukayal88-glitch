@@ -1,20 +1,14 @@
-function convertToRoman(num) {
+function romanNumeral(num) {
     if (num === 0) return "";
 
     const symbols = [
-        ['M', 1000],
-        ['CM', 900],
-        ['D', 500],
-        ['CD', 400],
-        ['C', 100],
-        ['XC', 90],
-        ['L', 50],
-        ['XL', 40],
-        ['X', 10],
-        ['IX', 9],
-        ['V', 5],
-        ['IV', 4],
-        ['I', 1]
+        ['M',1000],
+        ['D',500],
+        ['C',100],
+        ['L',50],
+        ['X',10],
+        ['V',5],
+        ['I',1]
     ];
 
     let result = "";
@@ -25,6 +19,15 @@ function convertToRoman(num) {
             num -= symbols[i][1];
         }
     }
+
+    // Handle subtractive cases
+    result = result
+        .replace(/DCCCC/g, "CM")
+        .replace(/CCCC/g, "CD")
+        .replace(/LXXXX/g, "XC")
+        .replace(/XXXX/g, "XL")
+        .replace(/VIIII/g, "IX")
+        .replace(/IIII/g, "IV");
 
     return result;
 }
